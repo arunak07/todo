@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {padding-right: 50px;}
+    </style>
+</head>
+<body>
+    <h1>ToDo</h1>
+    
+    <form action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <label>Title</label>
+        <input type="text" name="title"><br>
+        <label>Description</label><br>
+        <textarea rows="5" cols="20" name="description"></textarea><br>
+        <input type="submit">
+    </form>
+    <div>
+        {% if val %}
+            {% for i in val %}
+                <table>
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.title}}</td>
+                        <td>{{i.description}}</td>
+                        <td><a href="update/{{i.id}}"><button>update</button></a></td>
+                        <td><a href="delete/{{i.id}}"><button>delete</button></a></td>
+                    </tr>
+                </table>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
